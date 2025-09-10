@@ -14,14 +14,14 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="/exam-intel-web-app/">
+  <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="ExamIntel AI - Your Smart Exam Preparation Assistant">
 
   <!-- CORS Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -43,46 +43,11 @@
   
   <script>
     window.addEventListener('load', function(ev) {
-      (()=>{var U=()=>navigator.vendor==="Google Inc."||navigator.agent==="Edg/",E=()=>typeof ImageDecoder>"u"?!1:U(),W=()=>typeof Intl.v8BreakIterator<"u"&&typeof Intl.Segmenter<"u",P=()=>{let s=[...]
-    The current context is NOT secure.`,o+=`
-    Read more: https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts`),Promise.reject(new Error(o))}let{serviceWorkerVersion:i,serviceWorkerUrl:r=l(`flutter_service_worker.js?v=${i}`),[...]
-    "use strict";
-
-    let eventListener;
-    eventListener = (message) => {
-        const pendingMessages = [];
-        const data = message.data;
-        data["instantiateWasm"] = (info,receiveInstance) => {
-            const instance = new WebAssembly.Instance(data["wasm"], info);
-            return receiveInstance(instance, data["wasm"])
-        };
-        import(data.js).then(async (skwasm) => {
-            await skwasm.default(data);
-
-            removeEventListener("message", eventListener);
-            for (const message of pendingMessages) {
-                dispatchEvent(message);
-            }
-        });
-        removeEventListener("message", eventListener);
-        eventListener = (message) => {
-
-            pendingMessages.push(message);
-        };
-
-        addEventListener("message", eventListener);
-    };
-    addEventListener("message", eventListener);
-    //# sourceMappingURL=flutter.js.map
-
-      if (!window._flutter) {
-  window._flutter = {};
-}
-_flutter.buildConfig = {"engineRevision":"39d6d6e699e51b2874210e14cddf1a22fb9524b2","builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"}]};
-
+      {{flutter_js}}
+      {{flutter_build_config}}
       _flutter.loader.load({
         serviceWorker: {
-          serviceWorkerVersion: "3601116488",
+          serviceWorkerVersion: {{flutter_service_worker_version}},
         },
         onEntrypointLoaded: async function(engineInitializer) {
           const appRunner = await engineInitializer.initializeEngine();
